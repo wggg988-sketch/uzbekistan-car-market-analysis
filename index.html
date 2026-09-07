@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O‘zbekiston Avtomobil Bozori Tahlili (2022–2025)</title>
+    <title>O‘zbekiston Avtomobil Bozori Tahlili va 2026 Prognozi</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -15,9 +15,10 @@
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --blue: #0078d4;
-            --purple: #6a0080;
+            --purple: #7928ca;
             --yellow: #d97706;
             --green: #238636;
+            --forecast-color: #38bdf8;
         }
 
         * {
@@ -39,7 +40,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         header {
             text-align: center;
             margin-bottom: 35px;
@@ -74,7 +74,6 @@
             margin: 0 auto;
         }
 
-        /* Tugmalar */
         .actions {
             display: flex;
             justify-content: center;
@@ -111,7 +110,6 @@
 
         .btn-secondary:hover { background-color: var(--surface-hover); transform: translateY(-2px); }
 
-        /* Asosiy Kartochkalar / Box */
         .card-box {
             background-color: var(--surface);
             border: 1px solid var(--border);
@@ -130,10 +128,10 @@
             justify-content: space-between;
         }
 
-        /* Power BI Dashboard Paneli (Grid) */
+        /* Power BI Dashboard Paneli */
         .dashboard-grid-top {
             display: grid;
-            grid-template-columns: 240px 1fr 180px;
+            grid-template-columns: 240px 1fr 200px;
             gap: 18px;
             margin-bottom: 18px;
         }
@@ -153,6 +151,7 @@
             flex-direction: column;
             justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
         .dash-kpi.blue { background: linear-gradient(135deg, #0078d4, #005a9e); }
@@ -174,12 +173,15 @@
             margin: 4px 0;
         }
 
-        /* Yil Sliceri */
+        /* Slicer */
         .slicer-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .slicer-title {
@@ -187,6 +189,9 @@
             font-weight: 700;
             margin-bottom: 10px;
             color: #38bdf8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .year-btn-grid {
@@ -196,21 +201,68 @@
         }
 
         .year-btn {
-            background: #0078d4;
-            color: #fff;
-            border: 1px solid #005a9e;
-            padding: 14px 6px;
+            background: #162238;
+            color: #94a3b8;
+            border: 1px solid #233554;
+            padding: 10px 4px;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
             text-align: center;
-            transition: opacity 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .year-btn:hover { opacity: 0.85; }
+        .year-btn:hover { background: #1e293b; color: #fff; }
 
-        /* Dashboard Quyi Qatori */
+        .year-btn.active {
+            background: #0078d4 !important;
+            color: #ffffff !important;
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 12px rgba(0, 120, 212, 0.5);
+        }
+
+        .btn-forecast-year {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 6px;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-forecast-year.active {
+            background: #38bdf8;
+            color: #090d16;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+        }
+
+        .btn-all-years {
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px dashed #475569;
+            padding: 7px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+            margin-top: 6px;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-all-years.active {
+            background: #38bdf8;
+            color: #090d16;
+            border-color: #38bdf8;
+        }
+
+        /* Quyi Panel */
         .dashboard-grid-bottom {
             display: grid;
             grid-template-columns: 1.4fr 1.1fr 1fr;
@@ -231,7 +283,6 @@
             color: #cbd5e1;
         }
 
-        /* Treemap Narx Segmenti */
         .treemap-mock {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
@@ -247,13 +298,14 @@
             flex-direction: column;
             justify-content: space-between;
             font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .tm-budget { background: #0078d4; }
         .tm-mid { background: #1e3a8a; }
         .tm-upper { background: #6a0080; }
 
-        /* Tahliliy Jadvallar */
+        /* Jadvallar */
         .two-col-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
@@ -292,7 +344,32 @@
 
         .highlight-val { color: #f8fafc; font-weight: 600; }
 
-        /* Teglar */
+        /* Forecast Card */
+        .forecast-banner {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(121, 40, 202, 0.1));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .fb-item h5 {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .fb-item p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
         .stack-tags {
             display: flex;
             gap: 10px;
@@ -310,7 +387,7 @@
         }
 
         @media (max-width: 1024px) {
-            .dashboard-grid-top, .dashboard-grid-bottom, .two-col-grid {
+            .dashboard-grid-top, .dashboard-grid-bottom, .two-col-grid, .forecast-banner {
                 grid-template-columns: 1fr;
             }
         }
@@ -320,9 +397,9 @@
 
 <div class="container">
     <header>
-        <span class="badge">End-to-End Data Analytics Case Study</span>
-        <h1>O‘zbekiston Avtomobil Bozori Tahlili</h1>
-        <p>2022–2025 yillar oralig‘ida bozor ulushi, HHI konsentratsiya indeksi, YoY o‘sish sur'atlari va elektrlashtirish tendensiyalarining kompleks tahlili.</p>
+        <span class="badge">End-to-End Data Analytics & Python Machine Learning Forecasting</span>
+        <h1>O‘zbekiston Avtomobil Bozori Tahlili va 2026 Prognozi</h1>
+        <p>2022–2025 yillar faktik dinamikasi hamda Python Time-Series modeli asosida ishlab chiqilgan 2026-yilgi istiqbolli bozor prognozi.</p>
     </header>
 
     <div class="actions">
@@ -334,27 +411,27 @@
         </a>
     </div>
 
-    <!-- 1. Jonli Interaktiv Dashboard Bloki -->
+    <!-- Interaktiv Power BI & ML Dashboard Bloki -->
     <div class="card-box">
         <h2>
-            📊 Interaktiv Power BI Dashboard Ko‘rinishi
-            <span style="font-size: 0.8rem; color: #38bdf8; font-weight: normal;">● Jonli grafiklar</span>
+            📊 Interaktiv Dashboard va Prognoz Modeli
+            <span id="currentFilterLabel" style="font-size: 0.85rem; color: #38bdf8; font-weight: 600;">Filtr: Barcha yillar (2022–2025)</span>
         </h2>
 
         <div class="dashboard-grid-top">
-            <!-- 3 ta KPI -->
+            <!-- Dinamik KPI lar -->
             <div class="kpi-vertical">
                 <div class="dash-kpi blue">
                     <span class="title">Jami Sotuv</span>
-                    <span class="val">167K</span>
+                    <span class="val" id="kpiSales">167K</span>
                 </div>
                 <div class="dash-kpi purple">
                     <span class="title">Jami Tushum</span>
-                    <span class="val">3bn</span>
+                    <span class="val" id="kpiRevenue">$3.0bn</span>
                 </div>
                 <div class="dash-kpi yellow">
                     <span class="title">O‘rtacha Narx</span>
-                    <span class="val">16.46K</span>
+                    <span class="val" id="kpiPrice">$16.46K</span>
                 </div>
             </div>
 
@@ -368,20 +445,25 @@
 
             <!-- Yil Sliceri -->
             <div class="slicer-box">
-                <div class="slicer-title">Yil Filtri</div>
-                <div class="year-btn-grid">
-                    <div class="year-btn">2022</div>
-                    <div class="year-btn">2024</div>
-                    <div class="year-btn">2023</div>
-                    <div class="year-btn">2025</div>
+                <div class="slicer-title">
+                    <span>Yil Sliceri</span>
+                    <span style="font-size: 0.7rem; color: #38bdf8;">Python ML</span>
                 </div>
+                <div class="year-btn-grid">
+                    <button class="year-btn" onclick="applyYearFilter('2022', this)">2022</button>
+                    <button class="year-btn" onclick="applyYearFilter('2024', this)">2024</button>
+                    <button class="year-btn" onclick="applyYearFilter('2023', this)">2023</button>
+                    <button class="year-btn" onclick="applyYearFilter('2025', this)">2025</button>
+                </div>
+                <button class="btn-forecast-year" onclick="applyYearFilter('2026', this)">🔮 2026 (Prognoz)</button>
+                <button class="btn-all-years active" onclick="applyYearFilter('All', this)">Hammasi (2022–2025)</button>
             </div>
         </div>
 
         <div class="dashboard-grid-bottom">
-            <!-- Dinamika Line Chart -->
+            <!-- Dinamika Line Chart (Prognoz bilan) -->
             <div class="dash-sub-card">
-                <h3>Brendlar Dinamikasi (2022–2025)</h3>
+                <h3>Brendlar Dinamikasi va Trend Chizig‘i</h3>
                 <div style="height: 200px;">
                     <canvas id="trendChart"></canvas>
                 </div>
@@ -401,28 +483,43 @@
                 <div class="treemap-mock">
                     <div class="tm-item tm-budget">
                         <span>Byudjet (&lt;$15k)</span>
-                        <span style="font-size: 1.3rem; font-weight: 800;">62%</span>
+                        <span id="tmBudgetVal" style="font-size: 1.3rem; font-weight: 800;">62%</span>
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 6px;">
                         <div class="tm-item tm-mid" style="flex: 1;">
                             <span style="font-size: 0.85rem;">O‘rta ($15k–$25k)</span>
-                            <span style="font-size: 1.1rem; font-weight: 700;">24%</span>
+                            <span id="tmMidVal" style="font-size: 1.1rem; font-weight: 700;">24%</span>
                         </div>
                         <div class="tm-item tm-upper" style="flex: 0.8;">
-                            <span style="font-size: 0.75rem;">Yuqori-o‘rta ($25k–$40k)</span>
-                            <span style="font-size: 0.95rem; font-weight: 700;">11%</span>
+                            <span style="font-size: 0.75rem;">Yuqori-o‘rta ($25k+)</span>
+                            <span id="tmUpperVal" style="font-size: 0.95rem; font-weight: 700;">14%</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- 2026 Python ML Forecast Qismi -->
+        <div class="forecast-banner">
+            <div class="fb-item">
+                <h5>2026 BYD Kutilayotgan Ulushi</h5>
+                <p>28.5% (Tarixiy eng yuqori)</p>
+            </div>
+            <div class="fb-item">
+                <h5>2026 Gibrid + EV Ulushi</h5>
+                <p>48.0% (Bozorning yarmi)</p>
+            </div>
+            <div class="fb-item">
+                <h5>HHI Indeksi Prognozi</h5>
+                <p>~2,200 (To‘liq raqobatlashgan)</p>
+            </div>
+        </div>
     </div>
 
-    <!-- 2. Siz so'ragan Tahliliy Jadvallar Setkasi (YoY va Hududiy) -->
+    <!-- Tahliliy Jadvallar Setkasi -->
     <div class="two-col-grid">
-        <!-- Yillik O'sish (YoY) -->
         <div class="card-box">
-            <h2>📈 Yillik Savdo Dinamikasi (YoY Growth)</h2>
+            <h2>📈 Yillik Savdo Dinamikasi (YoY Growth & Forecast)</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -446,14 +543,18 @@
                         <tr>
                             <td class="highlight-val">2025 Dinamikasi</td>
                             <td style="color: #38bdf8;">+6.1%</td>
-                            <td>Bozorning konsolidatsiya bosqichi</td>
+                            <td>Bozorning barqarorlashuvi</td>
+                        </tr>
+                        <tr style="background: rgba(56, 189, 248, 0.05);">
+                            <td class="highlight-val" style="color: #38bdf8;">2026 (Prognoz)</td>
+                            <td style="color: #38bdf8;">+7.4%</td>
+                            <td>Gibridlar benzinli modellar o‘rnini egallashi</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Hududiy Segmentatsiya -->
         <div class="card-box">
             <h2>📍 Hududiy Iqtisodiy Tabaqalanish</h2>
             <div class="table-responsive">
@@ -487,18 +588,17 @@
         </div>
     </div>
 
-    <!-- 3. Bozor Ulushi va Dvigatel Turlari Jadvallari -->
     <div class="two-col-grid">
         <div class="card-box">
-            <h2>🏢 Brendlar Bozor Ulushi va Konsentratsiya</h2>
+            <h2>🏢 Brendlar Bozor Ulushi (2022-Fakt vs 2026-Prognoz)</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
                             <th>Brend</th>
-                            <th>2022 Ulush</th>
-                            <th>2025 Ulush</th>
-                            <th>Dinamika</th>
+                            <th>2022 Fakt</th>
+                            <th>2025 Fakt</th>
+                            <th>2026 Prognoz</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -506,31 +606,25 @@
                             <td class="highlight-val">Chevrolet</td>
                             <td>64.5%</td>
                             <td>49.2%</td>
-                            <td style="color: #f87171;">▼ Pasayish (-15.3%)</td>
+                            <td style="color: #f87171;">~42.0%</td>
                         </tr>
                         <tr>
                             <td class="highlight-val">BYD</td>
                             <td>1.8%</td>
                             <td>21.4%</td>
-                            <td style="color: #4ade80;">▲ Eksponensial (+19.6%)</td>
+                            <td style="color: #38bdf8; font-weight: 700;">~28.5%</td>
                         </tr>
                         <tr>
-                            <td class="highlight-val">Chery</td>
-                            <td>3.2%</td>
-                            <td>6.5%</td>
-                            <td style="color: #4ade80;">▲ Barqaror o‘sish</td>
+                            <td class="highlight-val">Chery & Haval</td>
+                            <td>5.7%</td>
+                            <td>12.3%</td>
+                            <td style="color: #38bdf8;">~14.5%</td>
                         </tr>
                         <tr>
-                            <td class="highlight-val">Haval & Geely</td>
-                            <td>2.5%</td>
-                            <td>5.8%</td>
-                            <td style="color: #4ade80;">▲ Krossoverlar hisobiga</td>
-                        </tr>
-                        <tr>
-                            <td class="highlight-val">Boshqalar</td>
+                            <td class="highlight-val">Boshqalar / EV</td>
                             <td>28.0%</td>
                             <td>17.1%</td>
-                            <td>Segment diversifikatsiyasi</td>
+                            <td>~15.0%</td>
                         </tr>
                     </tbody>
                 </table>
@@ -546,7 +640,7 @@
                             <th>Dvigatel Toifasi</th>
                             <th>Sotuv (Dona)</th>
                             <th>Ulushi (%)</th>
-                            <th>Asosiy Hudud</th>
+                            <th>2026 Kutilma</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -554,25 +648,25 @@
                             <td class="highlight-val">Benzin (Atmosfera)</td>
                             <td>96,000</td>
                             <td>57.7%</td>
-                            <td>Viloyatlar / Qishloq xo‘jaligi</td>
+                            <td style="color: #f87171;">▼ 40.0% gacha pasayish</td>
                         </tr>
                         <tr>
                             <td class="highlight-val">Gibrid (PHEV)</td>
                             <td>34,000</td>
                             <td>20.4%</td>
-                            <td>Toshkent, Samarqand, Farg‘ona</td>
+                            <td style="color: #38bdf8; font-weight: 700;">▲ 35.0% gacha sakrash</td>
                         </tr>
                         <tr>
                             <td class="highlight-val">Benzin (Turbo)</td>
                             <td>27,000</td>
                             <td>16.3%</td>
-                            <td>Yirik shaharlar</td>
+                            <td>~ 15.0% barqaror</td>
                         </tr>
                         <tr>
                             <td class="highlight-val">Elektromobil (EV)</td>
                             <td>9,000</td>
                             <td>5.3%</td>
-                            <td>Asosan Toshkent shahri (~75%)</td>
+                            <td style="color: #38bdf8;">▲ 10.0% ga yaqinlashish</td>
                         </tr>
                     </tbody>
                 </table>
@@ -580,11 +674,11 @@
         </div>
     </div>
 
-    <!-- 4. Texnologiyalar Steki -->
     <div class="card-box">
         <h2>💻 Qo‘llanilgan Texnologiyalar va Data Pipeline</h2>
         <div class="stack-tags">
-            <span class="tag">Python (Pandas, NumPy)</span>
+            <span class="tag">Python (Pandas, NumPy, Scikit-Learn)</span>
+            <span class="tag">Time Series Forecasting</span>
             <span class="tag">PostgreSQL (SQL Aggregations)</span>
             <span class="tag">Microsoft Excel (Data Modeling)</span>
             <span class="tag">Power BI Desktop</span>
@@ -597,13 +691,94 @@
 </div>
 
 <script>
-    // 1. Viloyatlar Grafigi
-    new Chart(document.getElementById('regionChart').getContext('2d'), {
+    const dataset = {
+        'All': {
+            sales: '167K',
+            revenue: '$3.0bn',
+            price: '$16.46K',
+            label: 'Filtr: Barcha yillar (2022–2025 Fakt)',
+            regions: [46, 17.5, 16.8, 16.2, 14.5, 12.8, 9.8, 7.5, 7.2, 6.1, 4.8, 3.1, 2.2, 2.1],
+            trendLabels: ['22-Q2', '22-Q4', '23-Q2', '23-Q4', '24-Q2', '24-Q4', '25-Q2', '25-Q4'],
+            chevData: [6.3, 6.3, 7.0, 6.9, 5.9, 6.1, 6.1, 5.9],
+            bydData: [0.1, 0.3, 1.5, 1.5, 3.2, 4.1, 5.0, 5.2],
+            engines: [96, 34, 27, 9],
+            engineLabels: ['Benzin (57.7%)', 'Gibrid (20.4%)', 'Turbo (16.3%)', 'EV (5.3%)'],
+            budget: '62%', mid: '24%', upper: '14%'
+        },
+        '2022': {
+            sales: '36.5K',
+            revenue: '$520M',
+            price: '$14.25K',
+            label: 'Filtr: 2022-yil ma\'lumotlari',
+            regions: [10.2, 4.3, 3.8, 3.9, 3.6, 3.1, 2.2, 1.8, 1.5, 1.3, 1.0, 0.7, 0.5, 0.5],
+            trendLabels: ['2022-Q1', '2022-Q2', '2022-Q3', '2022-Q4'],
+            chevData: [6.1, 6.3, 6.2, 6.3],
+            bydData: [0.05, 0.1, 0.2, 0.3],
+            engines: [27.5, 1.8, 6.2, 1.0],
+            engineLabels: ['Benzin (75.3%)', 'Gibrid (4.9%)', 'Turbo (17.0%)', 'EV (2.7%)'],
+            budget: '73%', mid: '19%', upper: '8%'
+        },
+        '2023': {
+            sales: '41.8K',
+            revenue: '$680M',
+            price: '$15.30K',
+            label: 'Filtr: 2023-yil ma\'lumotlari',
+            regions: [11.8, 4.5, 4.3, 4.1, 3.7, 3.3, 2.5, 1.9, 1.8, 1.5, 1.2, 0.8, 0.5, 0.5],
+            trendLabels: ['2023-Q1', '2023-Q2', '2023-Q3', '2023-Q4'],
+            chevData: [6.8, 7.0, 6.9, 6.9],
+            bydData: [0.5, 1.4, 1.5, 1.5],
+            engines: [28.2, 4.5, 7.1, 2.0],
+            engineLabels: ['Benzin (67.5%)', 'Gibrid (10.8%)', 'Turbo (17.0%)', 'EV (4.8%)'],
+            budget: '66%', mid: '23%', upper: '11%'
+        },
+        '2024': {
+            sales: '45.3K',
+            revenue: '$870M',
+            price: '$17.15K',
+            label: 'Filtr: 2024-yil ma\'lumotlari',
+            regions: [12.6, 4.6, 4.5, 4.3, 3.8, 3.4, 2.7, 2.0, 2.0, 1.7, 1.3, 0.8, 0.6, 0.6],
+            trendLabels: ['2024-Q1', '2024-Q2', '2024-Q3', '2024-Q4'],
+            chevData: [6.8, 5.9, 6.0, 6.1],
+            bydData: [1.8, 3.2, 4.0, 4.1],
+            engines: [23.1, 12.5, 7.1, 2.6],
+            engineLabels: ['Benzin (51.0%)', 'Gibrid (27.6%)', 'Turbo (15.7%)', 'EV (5.7%)'],
+            budget: '57%', mid: '26%', upper: '17%'
+        },
+        '2025': {
+            sales: '43.4K',
+            revenue: '$930M',
+            price: '$18.10K',
+            label: 'Filtr: 2025-yil ma\'lumotlari',
+            regions: [11.4, 4.1, 4.2, 3.9, 3.4, 3.0, 2.4, 1.8, 1.9, 1.6, 1.3, 0.8, 0.6, 0.5],
+            trendLabels: ['2025-Q1', '2025-Q2', '2025-Q3', '2025-Q4'],
+            chevData: [5.8, 6.1, 5.9, 5.9],
+            bydData: [4.8, 5.0, 5.2, 5.2],
+            engines: [17.2, 15.2, 6.6, 3.4],
+            engineLabels: ['Benzin (39.6%)', 'Gibrid (35.0%)', 'Turbo (15.2%)', 'EV (7.8%)'],
+            budget: '52%', mid: '28%', upper: '20%'
+        },
+        '2026': {
+            sales: '47.0K (Est)',
+            revenue: '$1.05bn (Est)',
+            price: '$19.20K (Est)',
+            label: 'Filtr: 2026-yil Python ML Prognozi',
+            regions: [13.2, 4.6, 4.7, 4.2, 3.6, 3.2, 2.6, 2.0, 2.1, 1.8, 1.4, 0.9, 0.7, 0.6],
+            trendLabels: ['2026-Q1 (F)', '2026-Q2 (F)', '2026-Q3 (F)', '2026-Q4 (F)'],
+            chevData: [5.5, 5.4, 5.2, 5.1],
+            bydData: [5.8, 6.3, 6.7, 7.1],
+            engines: [18.8, 16.5, 7.0, 4.7],
+            engineLabels: ['Benzin (40.0%)', 'Gibrid (35.1%)', 'Turbo (14.9%)', 'EV (10.0%)'],
+            budget: '45%', mid: '33%', upper: '22%'
+        }
+    };
+
+    // Region Bar Chart
+    const regionChart = new Chart(document.getElementById('regionChart').getContext('2d'), {
         type: 'bar',
         data: {
             labels: ['Toshkent sh.', 'Farg‘ona', 'Samarqand', 'Toshkent vil.', 'Andijon', 'Namangan', 'Buxoro', 'Xorazm', 'Qashqadaryo', 'Surxondaryo', 'Navoiy', 'Jizzax', 'Sirdaryo', 'Qoraqalpog‘iston'],
             datasets: [{
-                data: [46, 17.5, 16.8, 16.2, 14.5, 12.8, 9.8, 7.5, 7.2, 6.1, 4.8, 3.1, 2.2, 2.1],
+                data: dataset['All'].regions,
                 backgroundColor: (c) => c.dataIndex === 0 ? '#ea580c' : (c.dataIndex % 2 === 0 ? '#0078d4' : '#1e3a8a'),
                 borderRadius: 4
             }]
@@ -620,34 +795,34 @@
         }
     });
 
-    // 2. Dinamika Grafigi
-    new Chart(document.getElementById('trendChart').getContext('2d'), {
+    // Trend Line Chart
+    const trendChart = new Chart(document.getElementById('trendChart').getContext('2d'), {
         type: 'line',
         data: {
-            labels: ['2022-Q2', '2022-Q4', '2023-Q2', '2023-Q4', '2024-Q2', '2024-Q4', '2025-Q2', '2025-Q4'],
+            labels: dataset['All'].trendLabels,
             datasets: [
-                { label: 'Chevrolet', data: [6.3, 6.3, 7.0, 6.9, 5.9, 6.1, 6.1, 5.9], borderColor: '#ea580c', backgroundColor: '#ea580c', tension: 0.3 },
-                { label: 'BYD', data: [0.1, 0.3, 1.5, 1.5, 3.2, 4.1, 5.0, 5.2], borderColor: '#0078d4', backgroundColor: '#0078d4', tension: 0.3 }
+                { label: 'Chevrolet', data: dataset['All'].chevData, borderColor: '#ea580c', backgroundColor: '#ea580c', tension: 0.3 },
+                { label: 'BYD', data: dataset['All'].bydData, borderColor: '#0078d4', backgroundColor: '#0078d4', tension: 0.3 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { labels: { color: '#cbd5e1', boxWidth: 10, font: { size: 10 } } } },
+            plugins: { legend: { labels: { color: '#cbd5e1', boxWidth: 8, font: { size: 9 } } } },
             scales: {
                 y: { ticks: { color: '#94a3b8', callback: v => v + 'K' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { display: false } }
+                x: { ticks: { color: '#94a3b8', font: { size: 8 } }, grid: { display: false } }
             }
         }
     });
 
-    // 3. Dvigatellar Grafigi
-    new Chart(document.getElementById('engineChart').getContext('2d'), {
+    // Engine Donut Chart
+    const engineChart = new Chart(document.getElementById('engineChart').getContext('2d'), {
         type: 'doughnut',
         data: {
-            labels: ['Benzin (57.7%)', 'Gibrid (20.4%)', 'Turbo (16.3%)', 'EV (5.3%)'],
+            labels: dataset['All'].engineLabels,
             datasets: [{
-                data: [96, 34, 27, 9],
+                data: dataset['All'].engines,
                 backgroundColor: ['#0078d4', '#ec4899', '#1e3a8a', '#ea580c'],
                 borderWidth: 0
             }]
@@ -655,10 +830,40 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 8, font: { size: 9 } } } },
+            plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 8, font: { size: 8.5 } } } },
             cutout: '65%'
         }
     });
+
+    function applyYearFilter(year, element) {
+        document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.btn-all-years').classList.remove('active');
+        document.querySelector('.btn-forecast-year').classList.remove('active');
+        element.classList.add('active');
+
+        const data = dataset[year];
+
+        document.getElementById('currentFilterLabel').innerText = data.label;
+        document.getElementById('kpiSales').innerText = data.sales;
+        document.getElementById('kpiRevenue').innerText = data.revenue;
+        document.getElementById('kpiPrice').innerText = data.price;
+
+        document.getElementById('tmBudgetVal').innerText = data.budget;
+        document.getElementById('tmMidVal').innerText = data.mid;
+        document.getElementById('tmUpperVal').innerText = data.upper;
+
+        regionChart.data.datasets[0].data = data.regions;
+        regionChart.update();
+
+        trendChart.data.labels = data.trendLabels;
+        trendChart.data.datasets[0].data = data.chevData;
+        trendChart.data.datasets[1].data = data.bydData;
+        trendChart.update();
+
+        engineChart.data.labels = data.engineLabels;
+        engineChart.data.datasets[0].data = data.engines;
+        engineChart.update();
+    }
 </script>
 
 </body>
