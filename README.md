@@ -1,3 +1,4 @@
+[auto analys09072026.pdf](https://github.com/user-attachments/files/31917325/auto.analys09072026.pdf)
 # 🚗 O‘zbekiston Avtomobil Bozori Tahlili va Savdo Dinamikasi (2022–2025)
 
 ## 📌 Loyiha Haqida (Project Overview)
@@ -9,6 +10,7 @@ Loyiha maqsadi — xom ma'lumotlarni tozalash, relyatsion modelga keltirish va b
 
 ## 📊 Dashboard Ko‘rinishi
 ![Dashboard Preview](preview.png)
+📄 **[To‘liq hisobotni PDF formatida yuklab olish / ko‘rish](./auto%20analys09072026.pdf)**
 
 ---
 
