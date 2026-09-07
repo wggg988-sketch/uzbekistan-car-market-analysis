@@ -52,10 +52,14 @@ Loyiha **Star Schema** (Yulduzsimon arxitektura) tamoyili asosida qurilgan:
 
 ---
 
-## 💻 Qo‘llanilgan Texnologiyalar
-* **Power BI Desktop:** Relyatsion model yaratish, ma'lumotlar vizualizatsiyasi va foydalanuvchi interfeysi (UI/UX).
-* **Power Query:** Ma'lumotlarni tozalash, bo‘sh (blank) qiymatlarni filtrlash va turlarni standartlashtirish.
-* **DAX (Data Analysis Expressions):** Dinamik o‘lchovlar (Measures) yaratish:
+## 💻 Qo‘llanilgan Texnologiyalar va Data Pipeline
+
+* **Python:** Xom ma'lumotlarni generatsiya qilish, tozalash, tahlil qilish va sintaktik xatoliklarni bartaraf etish (Pandas, NumPy).
+* **PostgreSQL:** Ma'lumotlarni relyatsion tuzilmaga o‘tkazish, SQL so‘rovlar (Queries, Aggregations) orqali tahliliy jadvallarni shakllantirish va eksport qilish (`psql_eksport.csv`).
+* **Microsoft Excel:** Ma'lumotlar modelini birlamchi tekshirish, oraliq hisob-kitoblar va ma'lumotlar strukturasini tayyorlash (`PowerBI_Avto_Model.xlsx`).
+* **Power BI Desktop:** Star Schema asosida yakuniy relyatsion modelni qurish, interaktiv vizuallar va hisobot dizayni (UI/UX).
+* **Power Query:** Sanalarni formatlash, bo‘sh (`Blank`) qiymatlarni tozalash va ustunlar turlarini standartlashtirish.
+* **DAX (Data Analysis Expressions):** Dinamik biznes o‘lchovlarini (Measures) hisoblash:
   * `Jami Sotuv = SUM(Fact_Sales[Sotilgan_Soni])`
   * `Jami Tushum = SUM(Fact_Sales[Tushum_USD])`
   * `O'rtacha Narx = AVERAGE(Fact_Sales[Narx_USD])`
