@@ -9,7 +9,7 @@ Loyiha maqsadi — xom ma'lumotlarni tozalash, relyatsion modelga keltirish va b
 ---
 
 ## 📊 Dashboard Ko‘rinishi
-![Dashboard Preview](preview.png)
+
 📄 **[To‘liq hisobotni PDF formatida yuklab olish / ko‘rish](./auto%20analys09072026.pdf)**
 
 ---
@@ -51,6 +51,7 @@ Loyiha **Star Schema** (Yulduzsimon arxitektura) tamoyili asosida qurilgan:
 * **Dim_Date (Sana jadvali):** Sana, Yil, Chorak, Oy iyerarxiyasi.
 * **Dim_Car (Avtomobillar o‘lchov jadvali):** Brend, Model, Dvigatel turi, Narx segmenti ma'lumotlari.
 * **Dim_Region (Hududlar o‘lchov jadvali):** Viloyatlar va bozor toifalari.
+<img width="887" height="495" alt="image" src="https://github.com/user-attachments/assets/51e09e51-d5db-4fd0-b93c-846c127cb216" />
 
 ---
 
