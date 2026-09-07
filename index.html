@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O‘zbekiston Avtomobil Bozori Tahlili (2022–2025)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --accent-blue: #0078d4;
-            --accent-purple: #6a0080;
-            --accent-yellow: #d4a017;
+            --bg: #090d16;
+            --surface: #111726;
+            --surface-hover: #161f33;
+            --border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --blue: #0078d4;
+            --purple: #7928ca;
+            --yellow: #d97706;
+            --green: #238636;
         }
 
         * {
@@ -24,15 +26,15 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
             line-height: 1.6;
             padding: 40px 20px;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -41,82 +43,80 @@
             margin-bottom: 40px;
         }
 
+        .badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            margin-bottom: 14px;
+        }
+
         header h1 {
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             font-weight: 800;
             margin-bottom: 12px;
-            background: linear-gradient(90deg, #58a6ff, #bc8cff);
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         header p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        /* KPI Cards */
+        /* Metrikalar */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .kpi-card {
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 24px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease;
         }
 
-        .kpi-card.blue { background-color: var(--accent-blue); }
-        .kpi-card.purple { background-color: var(--accent-purple); }
-        .kpi-card.yellow { background-color: var(--accent-yellow); color: #111; }
+        .kpi-card:hover { transform: translateY(-4px); }
+        .kpi-card.blue { background: linear-gradient(135deg, #0078d4, #005a9e); }
+        .kpi-card.purple { background: linear-gradient(135deg, #7928ca, #4c1d95); }
+        .kpi-card.yellow { background: linear-gradient(135deg, #d97706, #b45309); }
+        .kpi-card.dark { background: var(--surface); border-color: rgba(56, 189, 248, 0.3); }
 
         .kpi-title {
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
             opacity: 0.9;
+            margin-bottom: 6px;
         }
 
         .kpi-value {
-            font-size: 2.5rem;
+            font-size: 2.7rem;
             font-weight: 800;
+            letter-spacing: -1px;
         }
 
-        /* Dashboard Preview */
-        .preview-section {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 40px;
+        .kpi-sub {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
         }
 
-        .preview-section h2 {
-            font-size: 1.4rem;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .preview-img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            display: block;
-        }
-
-        /* Actions */
+        /* Tugmalar */
         .actions {
             display: flex;
             justify-content: center;
@@ -128,46 +128,109 @@
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             padding: 12px 24px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 10px;
             text-decoration: none;
             transition: all 0.2s ease;
         }
 
         .btn-primary {
-            background-color: #238636;
+            background-color: var(--green);
             color: #ffffff;
+            box-shadow: 0 4px 14px rgba(35, 134, 54, 0.35);
         }
 
         .btn-primary:hover {
             background-color: #2ea043;
+            transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background-color: #21262d;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
+            background-color: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
         }
 
         .btn-secondary:hover {
-            background-color: #30363d;
+            background-color: var(--surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
-        /* Stack Section */
-        .stack-section {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
+        /* Asosiy bloklar */
+        .card-box {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
         }
 
-        .stack-section h3 {
-            margin-bottom: 16px;
+        .card-box h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        .preview-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: block;
+        }
+
+        /* Jadvallar */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.92rem;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.04);
+            color: #38bdf8;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+            color: var(--text-primary);
+        }
+
+        .highlight-val {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        /* 2 Ustunli Setka */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        /* Teglar */
         .stack-tags {
             display: flex;
             gap: 10px;
@@ -175,12 +238,13 @@
         }
 
         .tag {
-            background: #21262d;
-            border: 1px solid var(--border-color);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #58a6ff;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            color: #93c5fd;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -188,48 +252,232 @@
 
 <div class="container">
     <header>
-        <h1>🚗 O‘zbekiston Avtomobil Bozori Tahlili</h1>
-        <p>2022–2025 yillar oralig‘idagi savdo dinamikasi, hududiy segmentatsiya va dvigatel turlari bo‘yicha interaktiv Power BI tahlili.</p>
+        <span class="badge">End-to-End Data Analytics Case Study</span>
+        <h1>O‘zbekiston Avtomobil Bozori Tahlili</h1>
+        <p>2022–2025 yillar oralig‘ida bozor ulushi, HHI konsentratsiya indeksi, YoY o‘sish sur'atlari va elektrlashtirish tendensiyalarining kompleks tahlili.</p>
     </header>
 
+    <!-- Asosiy Ko'rsatkichlar -->
     <div class="kpi-grid">
         <div class="kpi-card blue">
             <div class="kpi-title">Jami Sotuv</div>
             <div class="kpi-value">167K</div>
+            <div class="kpi-sub" style="color: #e0f2fe;">Umumiy bitimlar soni</div>
         </div>
         <div class="kpi-card purple">
             <div class="kpi-title">Jami Tushum</div>
-            <div class="kpi-value">$3bn</div>
+            <div class="kpi-value">$3.0bn</div>
+            <div class="kpi-sub" style="color: #f3e8ff;">Bozorning umumiy aylanmasi</div>
         </div>
         <div class="kpi-card yellow">
             <div class="kpi-title">O‘rtacha Narx</div>
             <div class="kpi-value">$16.46K</div>
+            <div class="kpi-sub" style="color: #fef3c7;">1 ta avtomobil bo‘yicha o‘rtacha qiymat</div>
+        </div>
+        <div class="kpi-card dark">
+            <div class="kpi-title" style="color: #38bdf8;">HHI Indeksi</div>
+            <div class="kpi-value" style="color: #38bdf8;">~2,950</div>
+            <div class="kpi-sub">Bozor raqobat muhitiga o‘tmoqda (4,200 dan)</div>
         </div>
     </div>
 
     <div class="actions">
         <a href="./auto%20analys09072026.pdf" target="_blank" class="btn btn-primary">
-            📄 Hisobotni Ko‘rish (PDF)
+            📄 To‘liq Hisobotni Ko‘rish (PDF)
         </a>
         <a href="https://github.com/wggg988-sketch/uzbekistan-car-market-analysis" target="_blank" class="btn btn-secondary">
             💻 GitHub Repozitoriy
         </a>
     </div>
 
-    <div class="preview-section">
-        <h2>📊 Interaktiv Dashboard Ko‘rinishi</h2>
+    <!-- Dashboard Vizuali -->
+    <div class="card-box">
+        <h2>📊 Interaktiv Power BI Dashboard Ko‘rinishi</h2>
         <img src="preview.png" alt="Power BI Dashboard" class="preview-img">
     </div>
 
-    <div class="stack-section">
-        <h3>💻 Qo‘llanilgan Texnologiyalar Steki</h3>
+    <!-- Tahliliy Jadvallar Setkasi -->
+    <div class="two-col-grid">
+        <!-- Bozor Ulushi & HHI -->
+        <div class="card-box">
+            <h2>🏢 Brendlar Bozor Ulushi va Konsentratsiya</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Brend</th>
+                            <th>2022 Ulush</th>
+                            <th>2025 Ulush</th>
+                            <th>Dinamika</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight-val">Chevrolet</td>
+                            <td>64.5%</td>
+                            <td>49.2%</td>
+                            <td style="color: #f87171;">▼ Pasayish (-15.3%)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">BYD</td>
+                            <td>1.8%</td>
+                            <td>21.4%</td>
+                            <td style="color: #4ade80;">▲ Eksponensial (+19.6%)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Chery</td>
+                            <td>3.2%</td>
+                            <td>6.5%</td>
+                            <td style="color: #4ade80;">▲ Barqaror o‘sish</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Haval & Geely</td>
+                            <td>2.5%</td>
+                            <td>5.8%</td>
+                            <td style="color: #4ade80;">▲ Krossoverlar hisobiga</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Boshqalar</td>
+                            <td>28.0%</td>
+                            <td>17.1%</td>
+                            <td>Segment diversifikatsiyasi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Dvigatel Turlari -->
+        <div class="card-box">
+            <h2>⚡ Dvigatel Turlari va Ekologik Segment</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dvigatel Toifasi</th>
+                            <th>Sotuv (Dona)</th>
+                            <th>Ulushi (%)</th>
+                            <th>Asosiy Hudud</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight-val">Benzin (Atmosfera)</td>
+                            <td>96,000</td>
+                            <td>57.7%</td>
+                            <td>Viloyatlar / Qishloq xo‘jaligi</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Gibrid (PHEV)</td>
+                            <td>34,000</td>
+                            <td>20.4%</td>
+                            <td>Toshkent, Samarqand, Farg‘ona</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Benzin (Turbo)</td>
+                            <td>27,000</td>
+                            <td>16.3%</td>
+                            <td>Yirik shaharlar</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Elektromobil (EV)</td>
+                            <td>9,000</td>
+                            <td>5.3%</td>
+                            <td>Asosan Toshkent shahri (~75%)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Gibrid (EREV)</td>
+                            <td>~1,000</td>
+                            <td>0.3%</td>
+                            <td>Premium segment (Li Auto)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- YoY O'sish va Hududlar -->
+    <div class="two-col-grid">
+        <!-- Yillik O'sish (YoY) -->
+        <div class="card-box">
+            <h2>📈 Yillik Savdo Dinamikasi (YoY Growth)</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Davr</th>
+                            <th>Hajm Dinamikasi</th>
+                            <th>Yetakchi Segment O‘sishi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight-val">2023 vs 2022</td>
+                            <td style="color: #4ade80;">+14.2%</td>
+                            <td>Byudjet avtomobillari talabi</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">2024 vs 2023</td>
+                            <td style="color: #4ade80;">+8.5%</td>
+                            <td>Gibrid & EV segmenti (+142%)</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">2025 Dinamikasi</td>
+                            <td style="color: #38bdf8;">+6.1%</td>
+                            <td>Bozorning konsolidatsiya bosqichi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Hududiy Segmentatsiya -->
+        <div class="card-box">
+            <h2>📍 Hududiy Iqtisodiy Tabaqalanish</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hudud</th>
+                            <th>O‘rtacha Narx</th>
+                            <th>Xarid Xususiyati</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight-val">Toshkent shahri</td>
+                            <td>$24,800</td>
+                            <td>Premium, EV va Gibridlar markazi</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Farg‘ona vodiysi</td>
+                            <td>$14,200</td>
+                            <td>Byudjet sedanlar va tijorat mashinalari</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight-val">Samarqand & Buxoro</td>
+                            <td>$16,100</td>
+                            <td>O‘rta segment krossoverlar va sedanlar</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Texnologiyalar Steki -->
+    <div class="card-box">
+        <h2>💻 Qo‘llanilgan Texnologiyalar va Data Pipeline</h2>
         <div class="stack-tags">
-            <span class="tag">Python (Pandas)</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Microsoft Excel</span>
+            <span class="tag">Python (Pandas, NumPy)</span>
+            <span class="tag">PostgreSQL (SQL Aggregations)</span>
+            <span class="tag">Microsoft Excel (Data Modeling)</span>
             <span class="tag">Power BI Desktop</span>
-            <span class="tag">Power Query</span>
-            <span class="tag">DAX</span>
+            <span class="tag">DAX Measures</span>
+            <span class="tag">Power Query ETL</span>
+            <span class="tag">Herfindahl–Hirschman Index (HHI)</span>
+            <span class="tag">YoY Growth Analysis</span>
         </div>
     </div>
 </div>
